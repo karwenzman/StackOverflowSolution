@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="SampleNotifyPropertyChanged.Views.Screens.PersonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SampleNotifyPropertyChanged.Views.Screens"
+             xmlns:viewmodels="clr-namespace:SampleNotifyPropertyChanged.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:PersonViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Border CornerRadius="10" BorderThickness="1" BorderBrush="Black" Padding="5">
+        <Grid>
+            <!-- *** The main structure of the window is: Titel(Row=0), Body(Row=1) and Footer(Row=2) *** -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- *** The UI's title *** -->
+            <Label Grid.Row="0" 
+               Content="Person Screen" 
+               Margin="0 0 0 20"
+               FontSize="14" FontWeight="Bold"
+               HorizontalAlignment="Center">
+            </Label>
+
+            <!-- *** The UI's body *** -->
+            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- A column to seperate the user components on the left and right -->
+                <Rectangle Grid.Column="2" Grid.Row="0" Grid.RowSpan="8" MinWidth=" 20" />
+
+                <!-- FirstName components -->
+                <Label Grid.Row="0" Grid.Column="1" Content="First Name" />
+                <TextBox Grid.Row="1" Grid.Column="1"
+                     MinWidth="200"
+                     Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <!-- LastName components -->
+                <Label Grid.Row="0" Grid.Column="3" Content="Last Name" />
+                <TextBox Grid.Row="1" Grid.Column="3"
+                     MinWidth="200"
+                     Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+            </Grid>
+            
+            <!-- *** The UI's footer *** -->
+            <Label Grid.Row="2" 
+               Content="Testing IPropertyChanged" 
+               Margin="0 20 0 0"
+               FontSize="14" FontWeight="Bold"
+               HorizontalAlignment="Center">
+            </Label>
+            
+        </Grid>            
+    </Border>
+</UserControl>
