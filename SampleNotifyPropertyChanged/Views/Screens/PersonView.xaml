@@ -61,6 +61,28 @@
                 <TextBox Grid.Row="1" Grid.Column="3"
                      MinWidth="200"
                      Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+
+                <!-- FullName components -->
+                <Label Grid.Row="2" Grid.Column="1" Content="Full Name" />
+                <TextBox Grid.Row="3" Grid.Column="1"
+                         IsReadOnly="True"
+                         MinWidth="200"
+                         Text="{Binding FullName, Mode=OneWay}" />
+                <!-- Age components -->
+                <Label Grid.Row="2" Grid.Column="3" Content="Age" />
+                <TextBox Grid.Row="3" Grid.Column="3"
+                         MinWidth="200"
+                         Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+
+                <!-- Button components -->
+                <Button Grid.Row="8" Grid.Column="1" 
+                        Margin="15 20 15 5"
+                        Command="{Binding DiscardButtonCommand}"
+                        Content="Discard" />
+                <Button Grid.Row="8" Grid.Column="3" 
+                        Margin="15 20 15 5"
+                        Command="{Binding LoadDataButtonCommand}"
+                        Content="Load Data" />
             </Grid>
             
             <!-- *** The UI's footer *** -->
@@ -70,7 +92,6 @@
                FontSize="14" FontWeight="Bold"
                HorizontalAlignment="Center">
             </Label>
-            
         </Grid>            
     </Border>
 </UserControl>
