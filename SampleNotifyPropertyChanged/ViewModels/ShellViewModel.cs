@@ -1,12 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 using SampleNotifyPropertyChanged.ViewModels.Interfaces;
 
 namespace SampleNotifyPropertyChanged.ViewModels;
 
-public class ShellViewModel : IShellViewModel
+public partial class ShellViewModel : ViewModelBase, IShellViewModel
 {
-    public object? CurrentViewModel { get; set; } = new();
-    public string ApplicationName { get; set; } = "Sample NotifyPropertyChanged Application";
+    [ObservableProperty]
+    private object? _currentViewModel = new();
+    
+    [ObservableProperty]
+    private string _applicationName = "Project NotifyPropertyChanged";
 
     public ShellViewModel()
     {

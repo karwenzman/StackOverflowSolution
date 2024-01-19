@@ -14,13 +14,13 @@ public partial class PersonViewModel : ViewModelBase, IPersonViewModel
     public string FullName => $"{LastName}, {FirstName}";
 
     [ObservableProperty]
-    [Required(ErrorMessage = "This entry can not be empty!")]
     [NotifyPropertyChangedFor(nameof(FullName))]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "This entry can not be empty!")]
     private string _firstName = "Jane";
 
     [ObservableProperty]
-    [Required(ErrorMessage = "This entry can not be empty!")]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "This entry can not be empty!")]
     [NotifyPropertyChangedFor(nameof(FullName))]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
     private string _lastName = "Doe";
