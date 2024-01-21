@@ -9,7 +9,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"
         Title="ShellView" Height="450" Width="800">
     
-    <Grid>
+    <Grid Background="Azure">
         <!-- *** The main structure of the window is: Titel(Row=0), Body(Row=1) and Footer(Row=2) *** -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

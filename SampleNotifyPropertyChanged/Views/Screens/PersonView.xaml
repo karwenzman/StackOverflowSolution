@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SampleNotifyPropertyChanged.Views.Screens"
              xmlns:viewmodels="clr-namespace:SampleNotifyPropertyChanged.ViewModels"
+             xmlns:customcontrols="clr-namespace:SampleNotifyPropertyChanged.Views.CustomControls"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodels:PersonViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     
-    <Border CornerRadius="10" BorderThickness="1" BorderBrush="Black" Padding="5">
+    <Border CornerRadius="10" BorderThickness="1" BorderBrush="Black" Background="MintCream" Padding="5">
         <Grid>
             <!-- *** The main structure of the window is: Titel(Row=0), Body(Row=1) and Footer(Row=2) *** -->
             <Grid.RowDefinitions>
@@ -55,25 +56,24 @@
                 <Label Grid.Row="0" Grid.Column="1" Content="First Name" />
                 <TextBox Grid.Row="1" Grid.Column="1"
                      MinWidth="200"
-                     Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                     Text="{Binding Person.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- LastName components -->
                 <Label Grid.Row="0" Grid.Column="3" Content="Last Name" />
                 <TextBox Grid.Row="1" Grid.Column="3"
                      MinWidth="200"
-                     Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                     Text="{Binding Person.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- FullName components -->
-                <Label Grid.Row="2" Grid.Column="1" Content="Full Name" />
-                <TextBox Grid.Row="3" Grid.Column="1"
+                <Label Grid.Row="3" Grid.Column="1" Content="Full Name" />
+                <TextBox Grid.Row="4" Grid.Column="1"
                          IsReadOnly="True"
                          MinWidth="200"
-                         Text="{Binding FullName, Mode=OneWay}" />
+                         Text="{Binding Person.FullName, Mode=OneWay}" />
                 <!-- Age components -->
-                <Label Grid.Row="2" Grid.Column="3" Content="Age" />
-                <TextBox Grid.Row="3" Grid.Column="3"
+                <Label Grid.Row="3" Grid.Column="3" Content="Age" />
+                <customcontrols:NumericTextBox Grid.Row="4" Grid.Column="3" 
                          MinWidth="200"
-                         Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-
+                         NumericString="{Binding Person.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- Button components -->
                 <Button Grid.Row="8" Grid.Column="1" 
                         Margin="15 20 15 5"

@@ -1,50 +1,48 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SampleNotifyPropertyChanged.Models;
 using SampleNotifyPropertyChanged.ViewModels.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Net.NetworkInformation;
+using System.Windows.Input;
 
 namespace SampleNotifyPropertyChanged.ViewModels;
 
 public partial class PersonViewModel : ViewModelBase, IPersonViewModel
 {
-    //public string FirstName { get; set; } = "Jane";
-    //public string LastName { get; set; } = "Doe";
-    //public int Age { get; set; } = 20;
-
-    public string FullName => $"{LastName}, {FirstName}";
-
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(FullName))]
+    [NotifyDataErrorInfo]
+    [Required]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
-    [Required(AllowEmptyStrings = false, ErrorMessage = "This entry can not be empty!")]
-    private string _firstName = "Jane";
+    private PersonDisplayModel _person = new();
 
-    [ObservableProperty]
-    [Required(AllowEmptyStrings = false, ErrorMessage = "This entry can not be empty!")]
-    [NotifyPropertyChangedFor(nameof(FullName))]
-    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
-    private string _lastName = "Doe";
-
-    [ObservableProperty]
-    [Required(ErrorMessage = "This entry can not be empty!")]
-    [Range(1, 999, ErrorMessage = "The age must be in the range of 1 to 999")]
-    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
-    private int _age = 20;
-
+    //public PersonDisplayModel Person { get; set; } = new();
 
     public PersonViewModel()
     {
-
+    }
+    
+    /// <summary>
+    /// This code is doing what I am looking for.
+    /// </summary>
+    private void RequeryOfCanExecuteSuggested()
+    {
+        DiscardButtonCommand.NotifyCanExecuteChanged();
+     
+        //CommandManager.InvalidateRequerySuggested(); // not working
     }
 
     [RelayCommand(CanExecute = nameof(CanLoadDataButton))]
     public void LoadDataButton()
     {
         // TODO - Implement loading data.
+        Person = new() { FirstName = "Thorsten", LastName = "Jenning", Age = 52 };
+
     }
     public bool CanLoadDataButton()
     {
-        bool output = false;
+        bool output = true;
 
         return output;
     }
@@ -52,26 +50,25 @@ public partial class PersonViewModel : ViewModelBase, IPersonViewModel
     [RelayCommand(CanExecute = nameof(CanDiscardButton))]
     public void DiscardButton()
     {
-        FirstName = "Jane";
-        LastName = "Doe";
-        Age = 20;
+        Person.FirstName = "Jane";
+        Person.LastName = "Doe";
+        Person.Age = 20;
     }
     public bool CanDiscardButton()
     {
         bool output = true;
 
-        // TODO - Why is this not firing?
-        if (HasErrors)
-        {
-            output = false;
-        }
+        //if (Person.HasErrors)
+        //{
+        //    output = false;
+        //}
 
         // TODO - If HasErrors is firing this check might not be necessary.
-        if (FirstName.Length == 0 || LastName.Length == 0 || Age <= 0)
+        if (Person.FirstName.Length == 0 || Person.LastName.Length == 0 || Person.Age <= 0)
         {
             output = false;
         }
-
         return output;
     }
+
 }
