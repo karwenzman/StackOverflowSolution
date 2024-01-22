@@ -14,5 +14,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StackOverflow.Library\StackOverflow.Library.csproj" />
+  </ItemGroup>
   
 </Project>

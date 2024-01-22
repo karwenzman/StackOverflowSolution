@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleNotifyPropertyChanged", "SampleNotifyPropertyChanged\SampleNotifyPropertyChanged.csproj", "{7F2A023E-FB68-4E79-A683-7CF0D1A63D4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleNotifyPropertyChanged", "SampleNotifyPropertyChanged\SampleNotifyPropertyChanged.csproj", "{7F2A023E-FB68-4E79-A683-7CF0D1A63D4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflow.Library", "StackOverflow.Library\StackOverflow.Library.csproj", "{9236F77F-9ED3-4F47-BD46-096C84B30035}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackOverflow.Library", "StackOverflow.Library\StackOverflow.Library.csproj", "{9236F77F-9ED3-4F47-BD46-096C84B30035}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9B081ADD-6ACA-4815-ACFC-30E166C14697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflow.Data", "StackOverflow.Data\StackOverflow.Data.csproj", "{BC1CDDB1-2E45-46F0-8432-E8FFDA50CFA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{9236F77F-9ED3-4F47-BD46-096C84B30035}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9236F77F-9ED3-4F47-BD46-096C84B30035}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9236F77F-9ED3-4F47-BD46-096C84B30035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1CDDB1-2E45-46F0-8432-E8FFDA50CFA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1CDDB1-2E45-46F0-8432-E8FFDA50CFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1CDDB1-2E45-46F0-8432-E8FFDA50CFA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1CDDB1-2E45-46F0-8432-E8FFDA50CFA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC1CDDB1-2E45-46F0-8432-E8FFDA50CFA9} = {9B081ADD-6ACA-4815-ACFC-30E166C14697}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD4B1140-42B1-44DD-B971-AC773B8689D4}

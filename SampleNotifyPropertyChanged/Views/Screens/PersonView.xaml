@@ -79,10 +79,14 @@
                         Margin="15 20 15 5"
                         Command="{Binding DiscardButtonCommand}"
                         Content="Discard" />
-                <Button Grid.Row="8" Grid.Column="3" 
+                <Button Grid.Row="8" Grid.Column="2" 
                         Margin="15 20 15 5"
                         Command="{Binding LoadDataButtonCommand}"
                         Content="Load Data" />
+                <Button Grid.Row="8" Grid.Column="3" 
+                        Margin="15 20 15 5"
+                        Command="{Binding SaveDataButtonCommand}"
+                        Content="Save Data" />
             </Grid>
             
             <!-- *** The UI's footer *** -->
