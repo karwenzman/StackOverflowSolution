@@ -39,7 +39,7 @@ public partial class PersonViewModel : ViewModelBase, IPersonViewModel
     [RelayCommand(CanExecute = nameof(CanSaveDataButton))]
     public void SaveDataButton()
     {
-        PersonModel.SaveDataToRepository(Person.MapTo(new PersonModel()));
+        PersonModel.SaveDataToRepository(Person.MapTo());
     }
     public bool CanSaveDataButton()
     {

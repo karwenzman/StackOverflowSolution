@@ -6,28 +6,40 @@ namespace SampleNotifyPropertyChanged.Models;
 
 public partial class PersonDisplayModel : ModelBase
 {
-    public string FullName => $"{LastName}, {FirstName}";
+    public string FullName
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(FirstName))
+            {
+                return $"{LastName}{FirstName}";
+            }
+            else
+            {
+                return $"{LastName}, {FirstName}";
+            }
+        }
+    }
 
     [ObservableProperty]
     [NotifyDataErrorInfo]
     [NotifyPropertyChangedFor(nameof(FullName))]
     [Required(AllowEmptyStrings = false, ErrorMessage = "This entry can not be empty!")]
-    private string _firstName = "default";
+    private string _firstName = string.Empty;
+    private string _backupFirstName = string.Empty;
 
     [ObservableProperty]
     [NotifyDataErrorInfo]
     [Required(AllowEmptyStrings = false, ErrorMessage = "This entry can not be empty!")]
     [NotifyPropertyChangedFor(nameof(FullName))]
-    private string _lastName = "default";
+    private string _lastName = string.Empty;
+    private string _backupLastName = string.Empty;
 
     [ObservableProperty]
     [NotifyDataErrorInfo]
     [Required(ErrorMessage = "This entry can not be empty!")]
     [Range(1, 999, ErrorMessage = "The age must be in the range of 1 to 999")]
     private int _age;
-
-    private string _backupFirstName = string.Empty;
-    private string _backupLastName = string.Empty;
     private int _backupAge;
 
     public void GetBackupValues()
@@ -69,12 +81,15 @@ public partial class PersonDisplayModel : ModelBase
         Age = person.Age;
     }
 
-    public PersonModel MapTo(PersonModel person)
+    public PersonModel MapTo()
     {
-        person.FirstName = FirstName;
-        person.LastName = LastName;
-        person.Age = Age;
+        PersonModel output = new()
+        {
+            FirstName = FirstName,
+            LastName = LastName,
+            Age = Age
+        };
 
-        return person;
+        return output;
     }
 }
