@@ -91,9 +91,9 @@
             
             <!-- *** The UI's footer *** -->
             <Label Grid.Row="2" 
-               Content="Testing IPropertyChanged" 
+               Content="Testing CommunityToolkit.Mvvm => ObservableValidator, ObservableProperty with nested properties" 
                Margin="0 20 0 0"
-               FontSize="14" FontWeight="Bold"
+               FontSize="10" FontWeight="Bold"
                HorizontalAlignment="Center">
             </Label>
         </Grid>            
