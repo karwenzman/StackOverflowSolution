@@ -5,7 +5,8 @@
         <!-- Sets basic look of the TextBox -->
         <Setter Property="Padding" Value="2 1" />
         <Setter Property="BorderBrush" Value="LightGray" />
-        
+        <Setter Property="BorderThickness" Value="1" />
+
         <!-- Removes the red border around the TextBox, if validation found errors -->
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
@@ -26,7 +27,7 @@
                         <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Foreground="Red" Text="{Binding ErrorContent}" />
+                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SampleTextBoxValidation.Views.Screens"
+             xmlns:local="clr-namespace:SampleTextBoxValidation.Views.Screens" 
+             xmlns:viewmodels="clr-namespace:SampleTextBoxValidation.ViewModels" 
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:HomeViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Border CornerRadius="10" BorderThickness="1" BorderBrush="Black" Background="MintCream" Padding="5">
@@ -52,25 +54,15 @@
                 <!-- FirstName components -->
                 <Label Grid.Row="0" Grid.Column="1" Content="First Name" />
                 <TextBox Grid.Row="1" Grid.Column="1"
-                     MinWidth="200"
-                     Text="{Binding Person.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         MinWidth="200"
+                         Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- LastName components -->
                 <Label Grid.Row="0" Grid.Column="3" Content="Last Name" />
                 <TextBox Grid.Row="1" Grid.Column="3"
-                     MinWidth="200"
-                     Text="{Binding Person.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         MinWidth="200"
+                         Style="{StaticResource ErrorValidationStyle}"
+                         Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
-                <!-- FullName components -->
-                <Label Grid.Row="3" Grid.Column="1" Content="Full Name" />
-                <TextBox Grid.Row="4" Grid.Column="1"
-                         IsReadOnly="True"
-                         MinWidth="200"
-                         Text="{Binding Person.FullName, Mode=OneWay}" />
-                <!-- Age components -->
-                <Label Grid.Row="3" Grid.Column="3" Content="Age" />
-                <TextBox Grid.Row="4" Grid.Column="3" 
-                         MinWidth="200"
-                         Text="{Binding Person.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- Button components -->
                 <Button Grid.Row="8" Grid.Column="1" 
                         Margin="15 20 15 5"
