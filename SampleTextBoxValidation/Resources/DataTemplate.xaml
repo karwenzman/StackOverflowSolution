@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:screens="clr-namespace:SampleTextBoxValidation.Views.Screens"
+                    xmlns:viewmodels="clr-namespace:SampleTextBoxValidation.ViewModels">
+
+    <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+        <screens:HomeView />
+    </DataTemplate>
+    
+</ResourceDictionary>
