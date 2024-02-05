@@ -13,22 +13,76 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
     [NotifyDataErrorInfo]
     [Required(ErrorMessage = "This field can not be empty!")]
-    private string _firstName = string.Empty;
-    private string _backupFirstName = string.Empty;
+    private string? _firstName = null;
+    private string? _backupFirstName = null;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
     [NotifyDataErrorInfo]
     [Required(ErrorMessage = "This field can not be empty!")]
-    private string _lastName = string.Empty;
-    private string _backupLastName = string.Empty;
+    private string? _lastName = null;
+    private string? _backupLastName = null;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
+    [NotifyDataErrorInfo]
+    [Required(ErrorMessage = "This field can not be empty!")]
+    private string? _intValueAsString = null;
+    private string? _backupIntValueAsString = null;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
+    [NotifyDataErrorInfo]
+    [Required(ErrorMessage = "This field can not be empty!")]
+    private string? _decimalValueAsString = null;
+    private string? _backupDecimalValueAsString = null;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
+    [NotifyDataErrorInfo]
+    [Required(ErrorMessage = "This field can not be empty!")]
+    private string? _doubleValueAsString = null;
+    private string? _backupDoubleValueAsString = null;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
+    [NotifyDataErrorInfo]
+    [Required(ErrorMessage = "This field can not be empty!")]
+    private int? _intValue = null;
+    private int? _backupIntValue = null;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
+    [NotifyDataErrorInfo]
+    [Required(ErrorMessage = "This field can not be empty!")]
+    private decimal? _decimalValue = null;
+    private decimal? _backupDecimalValue = null;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
+    [NotifyDataErrorInfo]
+    [Required(ErrorMessage = "This field can not be empty!")]
+    private double? _doubleValue = null;
+    private double? _backupDoubleValue = null;
 
     [RelayCommand(CanExecute = nameof(CanDiscardButton))]
     public void DiscardButton()
     {
         FirstName = _backupFirstName;
         LastName = _backupLastName;
+        IntValue = _backupIntValue;
+        DecimalValue = _backupDecimalValue;
+        DoubleValue = _backupDoubleValue;
+        IntValueAsString = _backupIntValueAsString;
+        DecimalValueAsString = _backupDecimalValueAsString;
+        DoubleValueAsString = _backupDoubleValueAsString;
     }
     public bool CanDiscardButton()
     {
@@ -40,7 +94,30 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
         {
             return true;
         }
-
+        else if (IntValue != _backupIntValue)
+        {
+            return true;
+        }
+        else if (DecimalValue != _backupDecimalValue)
+        {
+            return true;
+        }
+        else if (DoubleValue != _backupDoubleValue)
+        {
+            return true;
+        }
+        else if (IntValueAsString != _backupIntValueAsString)
+        {
+            return true;
+        }
+        else if (DecimalValueAsString != _backupDecimalValueAsString)
+        {
+            return true;
+        }
+        else if (DoubleValueAsString != _backupDoubleValueAsString)
+        {
+            return true;
+        }
         return false;
     }
 
@@ -51,6 +128,19 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
         _backupFirstName = FirstName;
         LastName = "Doe";
         _backupLastName = LastName;
+        IntValue = 30;
+        _backupIntValue = IntValue;
+        IntValueAsString = IntValue.ToString();
+        _backupIntValueAsString = IntValueAsString;
+        DecimalValue = 123.4567m;
+        _backupDecimalValue = DecimalValue;
+        DecimalValueAsString = DecimalValue.ToString();
+        _backupDecimalValueAsString = DecimalValueAsString;
+        DoubleValue = 123123.4567d;
+        _backupDoubleValue = DoubleValue;
+        DoubleValueAsString = DoubleValue.ToString();
+        _backupDoubleValueAsString = DoubleValueAsString;
+
         DiscardButtonCommand.NotifyCanExecuteChanged();
     }
 
@@ -59,6 +149,13 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
     {
         _backupFirstName = FirstName;
         _backupLastName = LastName;
+        _backupIntValueAsString = IntValueAsString;
+        _backupDecimalValueAsString = DecimalValueAsString;
+        _backupDoubleValueAsString = DoubleValueAsString;
+        _backupIntValue = IntValue;
+        _backupDecimalValue = DecimalValue;
+        _backupDoubleValue = DoubleValue;
+
         DiscardButtonCommand.NotifyCanExecuteChanged();
         MessageBox.Show("Values moved to private backup fields.", "SaveButton");
     }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using SampleTextBoxValidation.ViewModels;
 using SampleTextBoxValidation.ViewModels.Interfaces;
 using SampleTextBoxValidation.Views.Windows;
+using System.Diagnostics;
 using System.Windows;
 
 namespace SampleTextBoxValidation;

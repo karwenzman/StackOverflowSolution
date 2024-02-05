@@ -7,27 +7,42 @@
              xmlns:viewmodels="clr-namespace:SampleTextBoxValidation.ViewModels" 
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodels:HomeViewModel}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
 
     <Border CornerRadius="10" BorderThickness="1" BorderBrush="Black" Background="MintCream" Padding="5">
-        <Grid>
-            <!-- *** The main structure of the window is: Titel(Row=0), Body(Row=1) and Footer(Row=2) *** -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
+        <DockPanel>
             <!-- *** The UI's title *** -->
-            <Label Grid.Row="0" 
+            <Label DockPanel.Dock="Top" HorizontalAlignment="Center"
                Content="Home Screen" 
                Margin="0 0 0 20"
-               FontSize="14" FontWeight="Bold"
-               HorizontalAlignment="Center">
+               FontSize="14" FontWeight="Bold">
             </Label>
 
+            <!-- *** The UI's footer *** -->
+            <Label DockPanel.Dock="Bottom" HorizontalAlignment="Center"
+               Content="Testing CommunityToolkit.Mvvm => ObservableValidator on several user controls." 
+               Margin="0 20 0 0"
+               FontSize="10" FontWeight="Bold">
+            </Label>
+
+            <!-- Button components -->
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button  
+                        Margin="15 20 15 5"
+                        Command="{Binding DiscardButtonCommand}"
+                        Content="Discard" />
+                <Button 
+                        Margin="15 20 15 5"
+                        Command="{Binding LoadDataButtonCommand}"
+                        Content="Load Data" />
+                <Button 
+                        Margin="15 20 15 5"
+                        Command="{Binding SaveDataButtonCommand}"
+                        Content="Save Data" />
+            </StackPanel>
+
             <!-- *** The UI's body *** -->
-            <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <Grid DockPanel.Dock="Top" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -63,28 +78,42 @@
                          Style="{StaticResource ErrorValidationStyle}"
                          Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
-                <!-- Button components -->
-                <Button Grid.Row="8" Grid.Column="1" 
-                        Margin="15 20 15 5"
-                        Command="{Binding DiscardButtonCommand}"
-                        Content="Discard" />
-                <Button Grid.Row="8" Grid.Column="2" 
-                        Margin="15 20 15 5"
-                        Command="{Binding LoadDataButtonCommand}"
-                        Content="Load Data" />
-                <Button Grid.Row="8" Grid.Column="3" 
-                        Margin="15 20 15 5"
-                        Command="{Binding SaveDataButtonCommand}"
-                        Content="Save Data" />
-            </Grid>
+                <!-- Integer components -->
+                <Label Grid.Row="2" Grid.Column="1" Content="Integer" />
+                <TextBox Grid.Row="3" Grid.Column="1"
+                         MinWidth="200"
+                         Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="2" Grid.Column="2" Content="Custom IntegerTextBox" />
+                <TextBox Grid.Row="3" Grid.Column="2"
+                         MinWidth="200"
+                         Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="2" Grid.Column="3" Content="Integer As String" />
+                <TextBox Grid.Row="3" Grid.Column="3"
+                         MinWidth="200"
+                         Text="{Binding IntValueAsString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
-            <!-- *** The UI's footer *** -->
-            <Label Grid.Row="2" 
-               Content="Testing CommunityToolkit.Mvvm => ObservableValidator on several user controls." 
-               Margin="0 20 0 0"
-               FontSize="10" FontWeight="Bold"
-               HorizontalAlignment="Center">
-            </Label>
-        </Grid>
+                <!-- Decimal components -->
+                <Label Grid.Row="4" Grid.Column="1" Content="Decimal as Currency {0:C}" />
+                <TextBox Grid.Row="5" Grid.Column="1"
+                         MinWidth="200"
+                         Text="{Binding DecimalValue, StringFormat={}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="4" Grid.Column="3" Content="Decimal As String" />
+                <TextBox Grid.Row="5" Grid.Column="3"
+                         MinWidth="200"
+                         Text="{Binding DecimalValueAsString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+
+                <!-- Double components -->
+                <Label Grid.Row="6" Grid.Column="1" Content="Double as Float {0:F2}" />
+                <TextBox Grid.Row="7" Grid.Column="1"
+                         MinWidth="200"
+                         Text="{Binding DoubleValue, StringFormat={}{0:F2}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="6" Grid.Column="3" Content="Double As String" />
+                <TextBox Grid.Row="7" Grid.Column="3"
+                         MinWidth="200"
+                         Text="{Binding DoubleValueAsString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+
+            </Grid>
+        </DockPanel>
+
     </Border>
 </UserControl>
