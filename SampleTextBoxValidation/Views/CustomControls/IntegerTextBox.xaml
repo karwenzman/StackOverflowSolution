@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:SampleTextBoxValidation.Views.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+
+    <TextBox x:Name="integerTextBox"
+             PreviewTextInput="IntegerTextBox_PreviewTextInput"
+             PreviewKeyDown="IntegerTextBox_PreviewKeyDown"
+             LostFocus="IntegerTextBox_LostFocus"/>
+
 </UserControl>

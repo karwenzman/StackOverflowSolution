@@ -1,28 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SampleTextBoxValidation.Views.CustomControls
 {
-    /// <summary>
-    /// Interaktionslogik für IntegerTextBox.xaml
-    /// </summary>
     public partial class IntegerTextBox : UserControl
     {
         public IntegerTextBox()
         {
             InitializeComponent();
+        }
+
+        private void IntegerTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Debug.WriteLine($"Entered {nameof(IntegerTextBox_PreviewTextInput)}");
+
+        }
+
+        private void IntegerTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            Debug.WriteLine($"Entered {nameof(IntegerTextBox_PreviewKeyDown)}");
+
+            //if (e.Key == Key.Space)
+            //{
+            //    e.Handled = true;
+            //}
+            //else
+            //{
+            //    e.Handled = false;
+            //}
+        }
+
+        private void IntegerTextBox_LostFocus(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Debug.WriteLine($"Entered {nameof(IntegerTextBox_LostFocus)}");
+
         }
     }
 }
