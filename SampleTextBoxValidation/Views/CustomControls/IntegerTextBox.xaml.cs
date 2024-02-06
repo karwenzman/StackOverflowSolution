@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,11 +13,11 @@ namespace SampleTextBoxValidation.Views.CustomControls
         private static partial Regex IntegerPositivValuesOnlyRegex();
 
         public static readonly DependencyProperty DependencyPropertyOfValue =
-            DependencyProperty.Register(nameof(Value), typeof(int?), typeof(IntegerTextBox), new PropertyMetadata(0));
+            DependencyProperty.Register(nameof(Value), typeof(int), typeof(IntegerTextBox), new PropertyMetadata(0));
 
-        public int? Value
+        public int Value
         {
-            get { return (int?)GetValue(DependencyPropertyOfValue); }
+            get { return (int)GetValue(DependencyPropertyOfValue); }
             set { SetValue(DependencyPropertyOfValue, value); }
         }
 
@@ -24,52 +25,68 @@ namespace SampleTextBoxValidation.Views.CustomControls
         {
             InitializeComponent();
 
-            integerTextBox.TextChanged += IntegerTextBox_TextChanged;
-            integerTextBox.LostFocus += IntegerTextBox_LostFocus;
-            integerTextBox.PreviewTextInput += IntegerTextBox_PreviewTextInput;
-            integerTextBox.PreviewKeyDown += IntegerTextBox_PreviewKeyDown;
+            CustomIntegerTextBox.TextChanged += TextBox_TextChanged;
+            CustomIntegerTextBox.GotFocus += TextBox_GotFocus;
+            CustomIntegerTextBox.PreviewTextInput += TextBox_PreviewTextInput;
+            CustomIntegerTextBox.PreviewKeyDown += TextBox_PreviewKeyDown;
         }
 
-        private void IntegerTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine($"Entered {nameof(IntegerTextBox_PreviewTextInput)}");
+            Debug.WriteLine($"Entered {nameof(TextBox_GotFocus)}");
 
-            //e.Handled = IntegerPositivValuesOnlyRegex().IsMatch(e.Text);
+            (sender as TextBox)!.SelectAll();
         }
 
-        private void IntegerTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Debug.WriteLine($"Entered {nameof(IntegerTextBox_PreviewKeyDown)}");
+            Debug.WriteLine($"Entered {nameof(TextBox_PreviewTextInput)}");
 
-            //if (e.Key == Key.Space)
-            //{
-            //    e.Handled = true;
-            //}
-            //else
-            //{
-            //    e.Handled = false;
-            //}
+            e.Handled = IntegerPositivValuesOnlyRegex().IsMatch(e.Text);
         }
 
-        private void IntegerTextBox_LostFocus(object sender, System.Windows.RoutedEventArgs e)
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            Debug.WriteLine($"Entered {nameof(IntegerTextBox_LostFocus)}");
+            Debug.WriteLine($"Entered {nameof(TextBox_PreviewKeyDown)}");
 
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Back)
+            {
+                if ((sender as TextBox)!.Text.Length == 1)
+                {
+                    (sender as TextBox)!.SelectAll();
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Key.Delete)
+            {
+                if ((sender as TextBox)!.Text.Length == 1)
+                {
+                    (sender as TextBox)!.SelectAll();
+                    e.Handled = true;
+                }
+            }
         }
 
-        private void IntegerTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Debug.WriteLine($"Entered {nameof(IntegerTextBox_TextChanged)}");
+            Debug.WriteLine($"Entered {nameof(TextBox_TextChanged)}");
 
-            bool valid = int.TryParse(integerTextBox.Text, out int validInteger);
+            bool valid = int.TryParse((sender as TextBox)!.Text,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out int validInteger);
 
-            if ( valid )
+            if (valid)
             {
                 Value = validInteger;
             }
             else
             {
-                Value = 999;
+                Value = 999; // for testing, only, to show an error was not handled
             }
         }
     }

@@ -76,10 +76,9 @@
                          MinWidth="200"
                          Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- LastName components -->
-                <Label Grid.Row="0" Grid.Column="3" Content="Last Name {ErrorValidationStyle}" />
+                <Label Grid.Row="0" Grid.Column="3" Content="Last Name" />
                 <TextBox Grid.Row="1" Grid.Column="3"
                          MinWidth="200"
-                         Style="{StaticResource ErrorValidationStyle}"
                          Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Integer components -->
@@ -97,7 +96,7 @@
                          Text="{Binding IntValueAsString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Decimal components -->
-                <Label Grid.Row="4" Grid.Column="1" Content="Decimal as Currency {0:C}" />
+                <Label Grid.Row="4" Grid.Column="1" Content="Decimal StringFormat {0:C}" />
                 <TextBox Grid.Row="5" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding DecimalValue, StringFormat={}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
@@ -107,7 +106,7 @@
                          Text="{Binding DecimalValueAsString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Double components -->
-                <Label Grid.Row="6" Grid.Column="1" Content="Double as Float {0:F2}" />
+                <Label Grid.Row="6" Grid.Column="1" Content="Double StringFormat {0:F2}" />
                 <TextBox Grid.Row="7" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding DoubleValue, StringFormat={}{0:F2}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />

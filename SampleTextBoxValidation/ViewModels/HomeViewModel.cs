@@ -52,9 +52,9 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
     [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
     [NotifyDataErrorInfo]
-    [Required(ErrorMessage = "This field can not be empty!")]
-    private int? _intValue = null;
-    private int? _backupIntValue = null;
+    [Range(9, 999, ErrorMessage = "Value is out of range")]
+    private int _intValue = 0;
+    private int _backupIntValue = 0;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
