@@ -23,5 +23,9 @@
   <ItemGroup>
     <ProjectReference Include="..\StackOverflow.Library\StackOverflow.Library.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\CustomControls\" />
+  </ItemGroup>
   
 </Project>

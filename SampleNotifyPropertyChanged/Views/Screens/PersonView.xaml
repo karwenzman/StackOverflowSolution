@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SampleNotifyPropertyChanged.Views.Screens"
              xmlns:viewmodels="clr-namespace:SampleNotifyPropertyChanged.ViewModels"
-             xmlns:customcontrols="clr-namespace:SampleNotifyPropertyChanged.Views.CustomControls"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodels:PersonViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -71,9 +70,9 @@
                          Text="{Binding Person.FullName, Mode=OneWay}" />
                 <!-- Age components -->
                 <Label Grid.Row="3" Grid.Column="3" Content="Age" />
-                <customcontrols:NumericTextBox Grid.Row="4" Grid.Column="3" 
+                <TextBox Grid.Row="4" Grid.Column="3" 
                          MinWidth="200"
-                         NumericString="{Binding Person.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         Text="{Binding Person.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- Button components -->
                 <Button Grid.Row="8" Grid.Column="1" 
                         Margin="15 20 15 5"

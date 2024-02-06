@@ -88,9 +88,9 @@
                          MinWidth="200"
                          Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <Label Grid.Row="2" Grid.Column="3" Content="Custom IntegerTextBox" />
-                <TextBox Grid.Row="3" Grid.Column="3"
+                <customControls:IntegerTextBox Grid.Row="3" Grid.Column="3"
                          MinWidth="200"
-                         Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         Value="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <Label Grid.Row="2" Grid.Column="5" Content="Integer As String" />
                 <TextBox Grid.Row="3" Grid.Column="5"
                          MinWidth="200"
