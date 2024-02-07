@@ -10,7 +10,7 @@ namespace SampleTextBoxValidation.Views.CustomControls
     public partial class IntegerTextBox : UserControl
     {
         [GeneratedRegex("[^0-9]+")]
-        private static partial Regex IntegerPositivValuesOnlyRegex();
+        private static partial Regex IntegerPositiveValuesOnlyRegex();
 
         public static readonly DependencyProperty DependencyPropertyOfValue =
             DependencyProperty.Register(nameof(Value), typeof(int), typeof(IntegerTextBox), new PropertyMetadata(0));
@@ -42,7 +42,7 @@ namespace SampleTextBoxValidation.Views.CustomControls
         {
             Debug.WriteLine($"Entered {nameof(TextBox_PreviewTextInput)}");
 
-            e.Handled = IntegerPositivValuesOnlyRegex().IsMatch(e.Text);
+            e.Handled = IntegerPositiveValuesOnlyRegex().IsMatch(e.Text);
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
