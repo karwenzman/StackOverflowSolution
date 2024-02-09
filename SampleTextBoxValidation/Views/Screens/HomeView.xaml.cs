@@ -24,21 +24,21 @@ public partial class HomeView : UserControl
 
     private void TextBox_GotFocus(object sender, RoutedEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_GotFocus)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_GotFocus)} in {nameof(HomeView)}");
 
         (sender as TextBox)!.SelectAll();
     }
 
     private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_PreviewTextInput)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_PreviewTextInput)} in {nameof(HomeView)}");
 
         e.Handled = IntegerPositiveValuesOnlyRegex().IsMatch(e.Text);
     }
 
     private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_PreviewKeyDown)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_PreviewKeyDown)} in {nameof(HomeView)}");
 
         if (e.Key == Key.Space)
         {
@@ -64,7 +64,7 @@ public partial class HomeView : UserControl
 
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_TextChanged)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_TextChanged)} in {nameof(HomeView)}");
 
         bool valid = int.TryParse((sender as TextBox)!.Text,
             NumberStyles.Integer,

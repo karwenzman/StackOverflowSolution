@@ -82,20 +82,22 @@
                          Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Integer components -->
-                <Label Grid.Row="2" Grid.Column="1" Content="Integer TextBox" />
+                <Label Grid.Row="2" Grid.Column="1" Content="TextBox" />
                 <TextBox Grid.Row="3" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <Label Grid.Row="2" Grid.Column="3" Content="Custom TextBox" />
                 <TextBox x:Name="CustomTextBox" 
                          Grid.Row="3" Grid.Column="3"
-                         HorizontalContentAlignment="Right"
                          MinWidth="200"
+                         HorizontalContentAlignment="Right"
                          Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <Label Grid.Row="2" Grid.Column="5" Content="Custom IntegerTextBox" />
-                <customControls:IntegerTextBox Grid.Row="3" Grid.Column="5"
-                         MinWidth="200"
-                         Value="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <customControls:CustomTextBox
+                            Grid.Row="3" Grid.Column="5"
+                            MinWidth="200"
+                            HorizontalContentAlignment="Right"
+                            Value="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Decimal components -->
                 <Label Grid.Row="4" Grid.Column="1" Content="Decimal StringFormat {0:C}" />
