@@ -13,10 +13,10 @@ namespace SampleTextBoxValidation.Views.CustomControls;
 /// <para></para>
 /// Custom members:
 /// <br></br>- a dependency property is registered and linking to the property <see cref="IntegerValue"/>
-/// <br></br>- a callback method is implemented <see cref="OnValueChangedCallback(DependencyObject, DependencyPropertyChangedEventArgs)"/>
+/// <br></br>- a callback method is implemented <see cref="OnIntegerValueChangedCallback(DependencyObject, DependencyPropertyChangedEventArgs)"/>
 /// <br></br>- a <see cref="Regex"/> expression is defined to control user input
 /// </summary>
-public partial class IntegerTextBox : TextBox, INotifyPropertyChanged
+public partial class IntegerTextBox : TextBox
 {
     // My understanding is, that manually raising a property changed event is not necessary.
     // The property engine does this. Is that correct?
@@ -32,7 +32,7 @@ public partial class IntegerTextBox : TextBox, INotifyPropertyChanged
     // Is the setting of DefaultUpdateSourceTrigger=PropertyChanged making the expression in xaml redundant, or vice versa?
     private static FrameworkPropertyMetadata? _frameworkPropertyMetadata = new()
     {
-        PropertyChangedCallback = OnValueChangedCallback,
+        PropertyChangedCallback = OnIntegerValueChangedCallback,
         BindsTwoWayByDefault = true,
         DefaultUpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged,
     };
@@ -41,7 +41,7 @@ public partial class IntegerTextBox : TextBox, INotifyPropertyChanged
     // If I just have to register a callback, then this option is sufficient.
     private static PropertyMetadata? _propertyMetadata = new()
     {
-        PropertyChangedCallback = OnValueChangedCallback,
+        PropertyChangedCallback = OnIntegerValueChangedCallback,
     };
 
     public int IntegerValue
@@ -72,9 +72,9 @@ public partial class IntegerTextBox : TextBox, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(propertyName)));
     }
 
-    private static void OnValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnIntegerValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(OnValueChangedCallback)} in {nameof(IntegerTextBox)}");
+        Debug.WriteLine($"Entered {nameof(OnIntegerValueChangedCallback)} in {nameof(IntegerTextBox)}");
         Debug.WriteLine($"Value changed from {(int)e.OldValue} to {(int)e.NewValue}");
         // This is my main question:
         // Does this command start the data binding so that the UI is updating the textbox?
