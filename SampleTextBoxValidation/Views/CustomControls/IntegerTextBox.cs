@@ -16,7 +16,7 @@ namespace SampleTextBoxValidation.Views.CustomControls;
 /// <br></br>- a callback method is implemented <see cref="OnValueChangedCallback(DependencyObject, DependencyPropertyChangedEventArgs)"/>
 /// <br></br>- a <see cref="Regex"/> expression is defined to control user input
 /// </summary>
-public partial class CustomTextBox : TextBox, INotifyPropertyChanged
+public partial class IntegerTextBox : TextBox, INotifyPropertyChanged
 {
     // My understanding is, that manually raising a property changed event is not necessary.
     // The property engine does this. Is that correct?
@@ -50,15 +50,15 @@ public partial class CustomTextBox : TextBox, INotifyPropertyChanged
         set
         {
             // My understanding is, that there is no need to add any additional logic into this setter.
-            Debug.WriteLine($"Entered Setter in {nameof(CustomTextBox)}");
+            Debug.WriteLine($"Entered Setter in {nameof(IntegerTextBox)}");
             SetValue(ValueProperty, value);
         }
     }
 
     public static readonly DependencyProperty ValueProperty =
-        DependencyProperty.Register(nameof(IntegerValue), typeof(int), typeof(CustomTextBox), _frameworkPropertyMetadata);
+        DependencyProperty.Register(nameof(IntegerValue), typeof(int), typeof(IntegerTextBox), _frameworkPropertyMetadata);
 
-    public CustomTextBox()
+    public IntegerTextBox()
     {
         TextChanged += TextBox_TextChanged;
         GotFocus += TextBox_GotFocus;
@@ -68,13 +68,13 @@ public partial class CustomTextBox : TextBox, INotifyPropertyChanged
 
     private void OnPropertyChanged(string propertyName)
     {
-        Debug.WriteLine($"Entered {nameof(OnPropertyChanged)} in {nameof(CustomTextBox)}");
+        Debug.WriteLine($"Entered {nameof(OnPropertyChanged)} in {nameof(IntegerTextBox)}");
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(propertyName)));
     }
 
     private static void OnValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(OnValueChangedCallback)} in {nameof(CustomTextBox)}");
+        Debug.WriteLine($"Entered {nameof(OnValueChangedCallback)} in {nameof(IntegerTextBox)}");
         Debug.WriteLine($"Value changed from {(int)e.OldValue} to {(int)e.NewValue}");
         // This is my main question:
         // Does this command start the data binding so that the UI is updating the textbox?
@@ -82,7 +82,7 @@ public partial class CustomTextBox : TextBox, INotifyPropertyChanged
         d.SetCurrentValue(ValueProperty, (int)e.NewValue);
 
         // Is it necessary to update the Property to start the data binding?
-        var myInstance = (CustomTextBox)d;
+        var myInstance = (IntegerTextBox)d;
         myInstance.IntegerValue = (int)e.NewValue;
         // Is calling OnPorpertyChanged manually really necessary?
         myInstance.OnPropertyChanged(nameof(IntegerValue));
@@ -90,21 +90,21 @@ public partial class CustomTextBox : TextBox, INotifyPropertyChanged
 
     private void TextBox_GotFocus(object sender, RoutedEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_GotFocus)} in {nameof(CustomTextBox)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_GotFocus)} in {nameof(IntegerTextBox)}");
 
         (sender as TextBox)!.SelectAll();
     }
 
     private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_PreviewTextInput)} in {nameof(CustomTextBox)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_PreviewTextInput)} in {nameof(IntegerTextBox)}");
 
         e.Handled = PositiveIntergerValuesRegex().IsMatch(e.Text);
     }
 
     private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_PreviewKeyDown)} in {nameof(CustomTextBox)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_PreviewKeyDown)} in {nameof(IntegerTextBox)}");
 
         if (e.Key == Key.Space)
         {
@@ -141,7 +141,7 @@ public partial class CustomTextBox : TextBox, INotifyPropertyChanged
 
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        Debug.WriteLine($"Entered {nameof(TextBox_TextChanged)} in {nameof(CustomTextBox)}");
+        Debug.WriteLine($"Entered {nameof(TextBox_TextChanged)} in {nameof(IntegerTextBox)}");
 
         bool valid = int.TryParse((sender as TextBox)!.Text,
             NumberStyles.Integer,

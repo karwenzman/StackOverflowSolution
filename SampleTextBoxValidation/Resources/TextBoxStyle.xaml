@@ -67,7 +67,7 @@
     </Style>
 
     <!-- A custom control derivated from TextBox targeting CustomTextBox-->
-    <Style TargetType="customControls:CustomTextBox">
+    <Style TargetType="customControls:IntegerTextBox">
         <!-- Sets basic look of the TextBox -->
         <Setter Property="Padding" Value="2 1" />
         <Setter Property="BorderBrush" Value="LightGray" />

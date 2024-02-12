@@ -82,12 +82,12 @@
                          Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Integer components -->
-                <Label Grid.Row="2" Grid.Column="1" Content="TextBox" />
+                <Label Grid.Row="2" Grid.Column="1" Content="Ordinary TextBox" />
                 <TextBox Grid.Row="3" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="2" Grid.Column="3" Content="CustomTextBox" />
-                <customControls:CustomTextBox
+                <Label Grid.Row="2" Grid.Column="3" Content="Integer TextBox" />
+                <customControls:IntegerTextBox
                             Grid.Row="3" Grid.Column="3"
                             MinWidth="200"
                             HorizontalContentAlignment="Right"
