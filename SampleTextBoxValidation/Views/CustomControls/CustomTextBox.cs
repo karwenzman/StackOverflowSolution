@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,22 +8,55 @@ using System.Windows.Input;
 
 namespace SampleTextBoxValidation.Views.CustomControls;
 
-public partial class CustomTextBox : TextBox
+/// <summary>
+/// This custom control adds behavior to a class inheriting from <see cref="TextBox"/>.
+/// <para></para>
+/// Custom members:
+/// <br></br>- a dependency property is registered and linking to the property <see cref="IntegerValue"/>
+/// <br></br>- a callback method is implemented <see cref="OnValueChangedCallback(DependencyObject, DependencyPropertyChangedEventArgs)"/>
+/// <br></br>- a <see cref="Regex"/> expression is defined to control user input
+/// </summary>
+public partial class CustomTextBox : TextBox, INotifyPropertyChanged
 {
+    // My understanding is, that manually raising a property changed event is not necessary.
+    // The property engine does this. Is that correct?
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     [GeneratedRegex("[^0-9]+")]
-    private static partial Regex IntegerPositiveValuesOnlyRegex();
+    private static partial Regex PositiveIntergerValuesRegex();
 
-    private static FrameworkPropertyMetadata? _frameworkPropertyMetadata = new() { PropertyChangedCallback = ValueChangedCallback, BindsTwoWayByDefault = true };
-    private static PropertyMetadata? _propertyMetadata = new() { PropertyChangedCallback = ValueChangedCallback };
-    
-    public static readonly DependencyProperty ValueProperty =
-        DependencyProperty.Register(nameof(Value), typeof(int), typeof(CustomTextBox), _frameworkPropertyMetadata);
+    // Option a)
+    // This is the xaml code for the registered property:
+    // IntegerValue="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+    // Is the setting of BindsTwoWayByDefault=true making the expression in xaml redundant, or vice versa?
+    // Is the setting of DefaultUpdateSourceTrigger=PropertyChanged making the expression in xaml redundant, or vice versa?
+    private static FrameworkPropertyMetadata? _frameworkPropertyMetadata = new()
+    {
+        PropertyChangedCallback = OnValueChangedCallback,
+        BindsTwoWayByDefault = true,
+        DefaultUpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged,
+    };
 
-    public int Value
+    // Option b)
+    // If I just have to register a callback, then this option is sufficient.
+    private static PropertyMetadata? _propertyMetadata = new()
+    {
+        PropertyChangedCallback = OnValueChangedCallback,
+    };
+
+    public int IntegerValue
     {
         get { return (int)GetValue(ValueProperty); }
-        set { SetValue(ValueProperty, value); }
+        set
+        {
+            // My understanding is, that there is no need to add any additional logic into this setter.
+            Debug.WriteLine($"Entered Setter in {nameof(CustomTextBox)}");
+            SetValue(ValueProperty, value);
+        }
     }
+
+    public static readonly DependencyProperty ValueProperty =
+        DependencyProperty.Register(nameof(IntegerValue), typeof(int), typeof(CustomTextBox), _frameworkPropertyMetadata);
 
     public CustomTextBox()
     {
@@ -34,12 +66,26 @@ public partial class CustomTextBox : TextBox
         PreviewKeyDown += TextBox_PreviewKeyDown;
     }
 
-    private static void ValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private void OnPropertyChanged(string propertyName)
     {
-        Debug.WriteLine($"Entered {nameof(ValueChangedCallback)} in {nameof(CustomTextBox)}");
-        d.SetValue(ValueProperty, (int)e.NewValue);
-        Debug.WriteLine($"Value is: {(int)e.NewValue}");
+        Debug.WriteLine($"Entered {nameof(OnPropertyChanged)} in {nameof(CustomTextBox)}");
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(propertyName)));
+    }
 
+    private static void OnValueChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        Debug.WriteLine($"Entered {nameof(OnValueChangedCallback)} in {nameof(CustomTextBox)}");
+        Debug.WriteLine($"Value changed from {(int)e.OldValue} to {(int)e.NewValue}");
+        // This is my main question:
+        // Does this command start the data binding so that the UI is updating the textbox?
+        // I do see the correct values in NewValue and OldValue, but the UI does not display the value.
+        d.SetCurrentValue(ValueProperty, (int)e.NewValue);
+
+        // Is it necessary to update the Property to start the data binding?
+        var myInstance = (CustomTextBox)d;
+        myInstance.IntegerValue = (int)e.NewValue;
+        // Is calling OnPorpertyChanged manually really necessary?
+        myInstance.OnPropertyChanged(nameof(IntegerValue));
     }
 
     private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -53,7 +99,7 @@ public partial class CustomTextBox : TextBox
     {
         Debug.WriteLine($"Entered {nameof(TextBox_PreviewTextInput)} in {nameof(CustomTextBox)}");
 
-        e.Handled = IntegerPositiveValuesOnlyRegex().IsMatch(e.Text);
+        e.Handled = PositiveIntergerValuesRegex().IsMatch(e.Text);
     }
 
     private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -104,11 +150,11 @@ public partial class CustomTextBox : TextBox
 
         if (valid)
         {
-            Value = validInteger;
+            IntegerValue = validInteger;
         }
         else
         {
-            Value = 999; // for testing, only, to show an error was not handled
+            IntegerValue = 999; // for testing, only, to show an error was not handled
         }
     }
 }

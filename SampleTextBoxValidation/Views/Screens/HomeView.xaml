@@ -86,28 +86,24 @@
                 <TextBox Grid.Row="3" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="2" Grid.Column="3" Content="Custom TextBox" />
-                <TextBox x:Name="CustomTextBox" 
-                         Grid.Row="3" Grid.Column="3"
-                         MinWidth="200"
-                         HorizontalContentAlignment="Right"
-                         Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="2" Grid.Column="5" Content="Custom IntegerTextBox" />
+                <Label Grid.Row="2" Grid.Column="3" Content="CustomTextBox" />
                 <customControls:CustomTextBox
-                            Grid.Row="3" Grid.Column="5"
+                            Grid.Row="3" Grid.Column="3"
                             MinWidth="200"
                             HorizontalContentAlignment="Right"
-                            Value="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                            IntegerValue="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Decimal components -->
                 <Label Grid.Row="4" Grid.Column="1" Content="Decimal StringFormat {0:C}" />
                 <TextBox Grid.Row="5" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding DecimalValue, StringFormat={}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="4" Grid.Column="3" Content="Decimal As String" />
-                <TextBox Grid.Row="5" Grid.Column="3"
+                <Label Grid.Row="4" Grid.Column="3" Content="Custom DecimalTextBox" />
+                <customControls:DecimalTextBox 
+                         Grid.Row="5" Grid.Column="3"
                          MinWidth="200"
-                         Text="{Binding DecimalValueAsString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         HorizontalContentAlignment="Right"
+                         Value="{Binding DecimalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Double components -->
                 <Label Grid.Row="6" Grid.Column="1" Content="Double StringFormat {0:F2}" />

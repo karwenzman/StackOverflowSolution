@@ -60,17 +60,17 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
     [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
     [NotifyDataErrorInfo]
-    [Required(ErrorMessage = "This field can not be empty!")]
-    private decimal? _decimalValue = null;
-    private decimal? _backupDecimalValue = null;
+    [Range(9, 999, ErrorMessage = "Value is out of range")]
+    private decimal _decimalValue = 0;
+    private decimal _backupDecimalValue = 0;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
     [NotifyDataErrorInfo]
-    [Required(ErrorMessage = "This field can not be empty!")]
-    private double? _doubleValue = null;
-    private double? _backupDoubleValue = null;
+    [Range(9, 999, ErrorMessage = "Value is out of range")]
+    private double _doubleValue = 0;
+    private double _backupDoubleValue = 0;
 
     [RelayCommand(CanExecute = nameof(CanDiscardButton))]
     public void DiscardButton()

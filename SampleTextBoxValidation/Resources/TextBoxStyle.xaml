@@ -66,7 +66,7 @@
         </Setter>
     </Style>
 
-    <!-- A true custom control derivated from TextBox -->
+    <!-- A custom control derivated from TextBox targeting CustomTextBox-->
     <Style TargetType="customControls:CustomTextBox">
         <!-- Sets basic look of the TextBox -->
         <Setter Property="Padding" Value="2 1" />
@@ -103,6 +103,43 @@
         </Setter>
     </Style>
 
+    <!-- A custom control derivated from TextBox targeting DecimalTextBox-->
+    <Style TargetType="customControls:DecimalTextBox">
+        <!-- Sets basic look of the TextBox -->
+        <Setter Property="Padding" Value="2 1" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="1" />
+
+        <!-- Removes the red border around the TextBox, if validation found errors -->
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Enables the UI to show the error messages -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                        <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!-- Basic implementiation of a TextBox -->
     <Style TargetType="TextBox">
         <!-- Sets basic look of the TextBox -->
