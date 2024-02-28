@@ -21,7 +21,7 @@
 
             <!-- *** The UI's footer *** -->
             <Label DockPanel.Dock="Bottom" HorizontalAlignment="Center"
-               Content="Testing CommunityToolkit.Mvvm => ObservableValidator on several user controls." 
+               Content="{Binding ScreenFooter}" 
                Margin="0 20 0 0"
                FontSize="10" FontWeight="Bold">
             </Label>
@@ -71,27 +71,27 @@
                 <Rectangle Grid.Column="4" Grid.Row="0" Grid.RowSpan="10" MinWidth=" 20" />
 
                 <!-- FirstName components -->
-                <Label Grid.Row="0" Grid.Column="1" Content="First Name" />
+                <Label Grid.Row="0" Grid.Column="1" Content="String (ValidatesOnNotifyDataErrors=False)" />
                 <TextBox Grid.Row="1" Grid.Column="1"
                          MinWidth="200"
-                         Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <!-- LastName components -->
-                <Label Grid.Row="0" Grid.Column="3" Content="Last Name" />
+                         Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" />
+                <Label Grid.Row="0" Grid.Column="3" Content="String (ValidatesOnNotifyDataErrors=True)" />
                 <TextBox Grid.Row="1" Grid.Column="3"
                          MinWidth="200"
-                         Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Integer components -->
                 <Label Grid.Row="2" Grid.Column="1" Content="Integer (ValidatesOnNotifyDataErrors=False)" />
                 <TextBox Grid.Row="3" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" />
-                <Label Grid.Row="2" Grid.Column="3" Content="Integer (ValidatesOnNotifyDataErrors=True)" />
+                <Label Grid.Row="2" Grid.Column="3" Content="Integer (StringFormat={}{0:N0}, ValidatesOnNotifyDataErrors=True)" />
                 <TextBox Grid.Row="3" Grid.Column="3"
                          MinWidth="200"
-                         Style="{StaticResource EnhancedTextBoxStyle}"
-                         Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="2" Grid.Column="5" Content="Integer (CustomControl)" />
+                         Style="{StaticResource DefaultTextBoxStyle}"
+                         Text="{Binding IntValue, StringFormat={}{0:N0}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="2" Grid.Column="5" Content="IntegerTextBox" />
                 <customControls:IntegerTextBox
                             Grid.Row="3" Grid.Column="5"
                             MinWidth="200"
@@ -99,15 +99,16 @@
                             IntegerValue="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Decimal components -->
-                <Label Grid.Row="4" Grid.Column="1" Content="Decimal" />
+                <Label Grid.Row="4" Grid.Column="1" Content="Decimal (ValidatesOnNotifyDataErrors=False)" />
                 <TextBox Grid.Row="5" Grid.Column="1"
                          MinWidth="200"
-                         Text="{Binding DecimalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="4" Grid.Column="3" Content="Decimal StringFormat {0:C}" />
+                         Text="{Binding DecimalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" />
+                <Label Grid.Row="4" Grid.Column="3" Content="Decimal (StringFormat {}{0:C}, (ValidatesOnNotifyDataErrors=True))" />
                 <TextBox Grid.Row="5" Grid.Column="3"
                          MinWidth="200"
+                         Style="{StaticResource DefaultTextBoxStyle}"
                          Text="{Binding DecimalValue, StringFormat={}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="4" Grid.Column="5" Content="Decimal (CustomControl)" />
+                <Label Grid.Row="4" Grid.Column="5" Content="DecimalTextBox" />
                 <customControls:DecimalTextBox 
                          Grid.Row="5" Grid.Column="5"
                          MinWidth="200"

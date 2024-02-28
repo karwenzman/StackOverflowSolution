@@ -3,8 +3,9 @@ using Microsoft.Extensions.Hosting;
 using SampleTextBoxValidation.ViewModels;
 using SampleTextBoxValidation.ViewModels.Interfaces;
 using SampleTextBoxValidation.Views.Windows;
-using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace SampleTextBoxValidation;
 
@@ -14,6 +15,8 @@ public partial class App : Application
 
     public App()
     {
+        SetApplicationCulture();
+
         // Validate the environment variable.
         try
         {
@@ -47,6 +50,8 @@ public partial class App : Application
                 services.AddTransient<IHomeViewModel, HomeViewModel>();
             })
             .Build();
+
+
     }
 
     protected override async void OnStartup(StartupEventArgs e)
@@ -91,5 +96,38 @@ public partial class App : Application
             MessageBoxResult.No);
 
         return messageBoxResult;
+    }
+
+    /// <summary>
+    /// This method is setting the app's culture information.
+    /// <para></para>
+    /// The culture information is needed to display date or number values 
+    /// according to the cultures format style.
+    /// <para></para>
+    /// <br></br>- 
+    /// https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding.converterculture?view=windowsdesktop-8.0
+    /// <br></br>- 
+    /// If you do not set this property, the binding engine uses the Language property of the binding target object.
+    /// In XAML this defaults to "en-US" or inherits the value from the root element (or any element) of the page, 
+    /// if one has been explicitly set.
+    /// </summary>
+    /// <param name="cultureInfo">The standard culture is read from <see cref="CultureInfo.CurrentCulture"/>.</param>
+    private static void SetApplicationCulture(CultureInfo? cultureInfo = null)
+    {
+        // Validate parameters.
+        if (cultureInfo == null)
+        {
+            cultureInfo = CultureInfo.CurrentCulture;
+        };
+
+        Thread.CurrentThread.CurrentCulture = cultureInfo;
+        Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+        // This work around is needed to activate the culture in WPF controls like TextBox.
+        FrameworkElement.LanguageProperty.OverrideMetadata(
+            forType: typeof(FrameworkElement),
+            typeMetadata: new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(cultureInfo.Name)));
+
+        // TODO - Create a custom binding class (e.g., CultureAwareBinding) that automatically sets the ConverterCulture to the current culture when created.
     }
 }

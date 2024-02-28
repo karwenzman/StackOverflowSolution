@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SampleTextBoxValidation.ViewModels.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Windows;
 
 namespace SampleTextBoxValidation.ViewModels;
@@ -33,7 +34,11 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
     private int _backupIntValue = 0;
 
     [ObservableProperty]
-    private string? _screenTitle = "The first column uses the standard WPF controls without any modifaction or style.";
+    private string? _screenTitle = "The first column uses the standard WPF controls without any modifaction or style." +
+        "\nThe second column uses the 'DefaultTextBoxStyle', where the custom control is based on." +
+        "\nThe third column is a custom control.";
+    [ObservableProperty]
+    private string? _screenFooter = $"The current culture is: {CultureInfo.CurrentCulture.Name}"; 
     [ObservableProperty]
     private int _value = 0; // Temporally for testing.
 
