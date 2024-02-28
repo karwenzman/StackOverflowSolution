@@ -14,7 +14,7 @@
         <DockPanel>
             <!-- *** The UI's title *** -->
             <Label DockPanel.Dock="Top" HorizontalAlignment="Center"
-               Content="Home Screen" 
+               Content="{Binding ScreenTitle}" 
                Margin="0 0 0 20"
                FontSize="14" FontWeight="Bold">
             </Label>
@@ -82,38 +82,37 @@
                          Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Integer components -->
-                <Label Grid.Row="2" Grid.Column="1" Content="Ordinary TextBox" />
+                <Label Grid.Row="2" Grid.Column="1" Content="Integer (ValidatesOnNotifyDataErrors=False)" />
                 <TextBox Grid.Row="3" Grid.Column="1"
                          MinWidth="200"
+                         Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" />
+                <Label Grid.Row="2" Grid.Column="3" Content="Integer (ValidatesOnNotifyDataErrors=True)" />
+                <TextBox Grid.Row="3" Grid.Column="3"
+                         MinWidth="200"
+                         Style="{StaticResource EnhancedTextBoxStyle}"
                          Text="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="2" Grid.Column="3" Content="Integer TextBox" />
+                <Label Grid.Row="2" Grid.Column="5" Content="Integer (CustomControl)" />
                 <customControls:IntegerTextBox
-                            Grid.Row="3" Grid.Column="3"
+                            Grid.Row="3" Grid.Column="5"
                             MinWidth="200"
                             HorizontalContentAlignment="Right"
                             IntegerValue="{Binding IntValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                 <!-- Decimal components -->
-                <Label Grid.Row="4" Grid.Column="1" Content="Decimal StringFormat {0:C}" />
+                <Label Grid.Row="4" Grid.Column="1" Content="Decimal" />
                 <TextBox Grid.Row="5" Grid.Column="1"
                          MinWidth="200"
+                         Text="{Binding DecimalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="4" Grid.Column="3" Content="Decimal StringFormat {0:C}" />
+                <TextBox Grid.Row="5" Grid.Column="3"
+                         MinWidth="200"
                          Text="{Binding DecimalValue, StringFormat={}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="4" Grid.Column="3" Content="Custom DecimalTextBox" />
+                <Label Grid.Row="4" Grid.Column="5" Content="Decimal (CustomControl)" />
                 <customControls:DecimalTextBox 
-                         Grid.Row="5" Grid.Column="3"
+                         Grid.Row="5" Grid.Column="5"
                          MinWidth="200"
                          HorizontalContentAlignment="Right"
                          Value="{Binding DecimalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-
-                <!-- Double components -->
-                <Label Grid.Row="6" Grid.Column="1" Content="Double StringFormat {0:F2}" />
-                <TextBox Grid.Row="7" Grid.Column="1"
-                         MinWidth="200"
-                         Text="{Binding DoubleValue, StringFormat={}{0:F2}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <Label Grid.Row="6" Grid.Column="3" Content="Double As String" />
-                <TextBox Grid.Row="7" Grid.Column="3"
-                         MinWidth="200"
-                         Text="{Binding DoubleValueAsString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
             </Grid>
         </DockPanel>

@@ -2,15 +2,113 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:customControls="clr-namespace:SampleTextBoxValidation.Views.CustomControls">
 
+    <!-- Default implementiation of a TextBox. It is the base style for this application. -->
     <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
         <Setter Property="Margin" Value="0 5 0 5" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="24" />
         <Setter Property="Padding" Value="2 1" />
         <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    
+    <!-- Enhanced implementiation of a TextBox. -->
+    <Style x:Key="EnhancedTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}" >
+        <!-- Removes the red border around the TextBox, if validation found errors -->
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Enables the UI to show the error messages -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                        <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- A custom control derivated from TextBox targeting CustomTextBox. -->
+    <Style TargetType="customControls:IntegerTextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+        <!-- Removes the red border around the TextBox, if validation found errors -->
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Enables the UI to show the error messages -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                        <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- A custom control derivated from TextBox targeting DecimalTextBox. -->
+    <Style TargetType="customControls:DecimalTextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+        <!-- Removes the red border around the TextBox, if validation found errors -->
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Enables the UI to show the error messages -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                        <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Testing some styles. -->
     <Style x:Key="ErrorValidationStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
@@ -65,116 +163,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!-- A custom control derivated from TextBox targeting CustomTextBox-->
-    <Style TargetType="customControls:IntegerTextBox">
-        <!-- Sets basic look of the TextBox -->
-        <Setter Property="Padding" Value="2 1" />
-        <Setter Property="BorderBrush" Value="LightGray" />
-        <Setter Property="BorderThickness" Value="1" />
-
-        <!-- Removes the red border around the TextBox, if validation found errors -->
-        <Setter Property="Validation.ErrorTemplate">
-            <Setter.Value>
-                <ControlTemplate>
-                    <AdornedElementPlaceholder />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <!-- Enables the UI to show the error messages -->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <StackPanel>
-                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
-                            <ScrollViewer x:Name="PART_ContentHost" />
-                        </Border>
-                        <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- A custom control derivated from TextBox targeting DecimalTextBox-->
-    <Style TargetType="customControls:DecimalTextBox">
-        <!-- Sets basic look of the TextBox -->
-        <Setter Property="Padding" Value="2 1" />
-        <Setter Property="BorderBrush" Value="LightGray" />
-        <Setter Property="BorderThickness" Value="1" />
-
-        <!-- Removes the red border around the TextBox, if validation found errors -->
-        <Setter Property="Validation.ErrorTemplate">
-            <Setter.Value>
-                <ControlTemplate>
-                    <AdornedElementPlaceholder />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <!-- Enables the UI to show the error messages -->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <StackPanel>
-                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
-                            <ScrollViewer x:Name="PART_ContentHost" />
-                        </Border>
-                        <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
     
-    <!-- Basic implementiation of a TextBox -->
-    <Style TargetType="TextBox">
-        <!-- Sets basic look of the TextBox -->
-        <Setter Property="Padding" Value="2 1" />
-        <Setter Property="BorderBrush" Value="LightGray" />
-        <Setter Property="BorderThickness" Value="1" />
-
-        <!-- Removes the red border around the TextBox, if validation found errors -->
-        <Setter Property="Validation.ErrorTemplate">
-            <Setter.Value>
-                <ControlTemplate>
-                    <AdornedElementPlaceholder />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>      
-        
-        <!-- Enables the UI to show the error messages -->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <StackPanel>
-                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
-                            <ScrollViewer x:Name="PART_ContentHost" />
-                        </Border>
-                        <ItemsControl ItemsSource="{TemplateBinding Validation.Errors}" Margin="0 5 0 5">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Foreground="Red" FontStyle="Italic" Text="{Binding ErrorContent}" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
 </ResourceDictionary>

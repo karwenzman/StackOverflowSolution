@@ -28,33 +28,14 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
     [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
     [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
     [NotifyDataErrorInfo]
-    [Required(ErrorMessage = "This field can not be empty!")]
-    private string? _intValueAsString = null;
-    private string? _backupIntValueAsString = null;
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
-    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
-    [NotifyDataErrorInfo]
-    [Required(ErrorMessage = "This field can not be empty!")]
-    private string? _decimalValueAsString = null;
-    private string? _backupDecimalValueAsString = null;
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
-    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
-    [NotifyDataErrorInfo]
-    [Required(ErrorMessage = "This field can not be empty!")]
-    private string? _doubleValueAsString = null;
-    private string? _backupDoubleValueAsString = null;
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
-    [NotifyCanExecuteChangedFor(nameof(DiscardButtonCommand))]
-    [NotifyDataErrorInfo]
     [Range(9, 999, ErrorMessage = "Value is out of range")]
     private int _intValue = 0;
     private int _backupIntValue = 0;
+
+    [ObservableProperty]
+    private string? _screenTitle = "The first column uses the standard WPF controls without any modifaction or style.";
+    [ObservableProperty]
+    private int _value = 0; // Temporally for testing.
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveDataButtonCommand))]
@@ -78,11 +59,9 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
         FirstName = _backupFirstName;
         LastName = _backupLastName;
         IntValue = _backupIntValue;
+        Value = _backupIntValue; // Temporally for testing.
         DecimalValue = _backupDecimalValue;
         DoubleValue = _backupDoubleValue;
-        IntValueAsString = _backupIntValueAsString;
-        DecimalValueAsString = _backupDecimalValueAsString;
-        DoubleValueAsString = _backupDoubleValueAsString;
     }
     public bool CanDiscardButton()
     {
@@ -106,18 +85,6 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
         {
             return true;
         }
-        else if (IntValueAsString != _backupIntValueAsString)
-        {
-            return true;
-        }
-        else if (DecimalValueAsString != _backupDecimalValueAsString)
-        {
-            return true;
-        }
-        else if (DoubleValueAsString != _backupDoubleValueAsString)
-        {
-            return true;
-        }
         return false;
     }
 
@@ -130,16 +97,11 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
         _backupLastName = LastName;
         IntValue = 30;
         _backupIntValue = IntValue;
-        IntValueAsString = IntValue.ToString();
-        _backupIntValueAsString = IntValueAsString;
+        Value = _backupIntValue; // Temporally for testing.
         DecimalValue = 123.4567m;
         _backupDecimalValue = DecimalValue;
-        DecimalValueAsString = DecimalValue.ToString();
-        _backupDecimalValueAsString = DecimalValueAsString;
         DoubleValue = 123123.4567d;
         _backupDoubleValue = DoubleValue;
-        DoubleValueAsString = DoubleValue.ToString();
-        _backupDoubleValueAsString = DoubleValueAsString;
 
         DiscardButtonCommand.NotifyCanExecuteChanged();
     }
@@ -149,9 +111,6 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
     {
         _backupFirstName = FirstName;
         _backupLastName = LastName;
-        _backupIntValueAsString = IntValueAsString;
-        _backupDecimalValueAsString = DecimalValueAsString;
-        _backupDoubleValueAsString = DoubleValueAsString;
         _backupIntValue = IntValue;
         _backupDecimalValue = DecimalValue;
         _backupDoubleValue = DoubleValue;
