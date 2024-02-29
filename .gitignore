@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /SampleTextBoxValidation/appsettings.Development.json
 /SampleTextBoxValidation/appsettings.Production.json
+/SampleConverterCulture/appsettings.Development.json
+/SampleConverterCulture/appsettings.Production.json
+/SampleConverterCulture/Properties/launchSettings.json

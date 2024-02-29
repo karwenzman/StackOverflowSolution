@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SampleConverterCulture": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Production"
+      }
+    }
+  }
+}
