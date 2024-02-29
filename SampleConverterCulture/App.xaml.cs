@@ -120,6 +120,7 @@ public partial class App : Application
     /// <param name="environmentSettings">An array of string representing the values <b>DOTNET_ENVIRONMENT</b> could be set to.</param>
     private static void ValidateEnvironmentVariable(string[]? environmentSettings = null)
     {
+        // TODO - Why is launchSettings.json not be updated straight forward?
         try
         {
             var environmentVariable = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
