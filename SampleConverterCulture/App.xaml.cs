@@ -14,7 +14,7 @@ public partial class App : Application
     public App()
     {
         SetApplicationCulture();
-        ValidateEnvironmentVariable(["Development", "Production"]);
+        SetEnvironmentVariable(["Development", "Production"]);
 
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
@@ -118,26 +118,25 @@ public partial class App : Application
     /// the fallback value is 'Production'.
     /// </summary>
     /// <param name="environmentSettings">An array of string representing the values <b>DOTNET_ENVIRONMENT</b> could be set to.</param>
-    private static void ValidateEnvironmentVariable(string[]? environmentSettings = null)
+    private static void SetEnvironmentVariable(string[]? environmentSettings = null)
     {
-        // TODO - Why is launchSettings.json not be updated straight forward?
         try
         {
-            var environmentVariable = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-
             // Validate Parameters.
             if (environmentSettings == null)
             {
                 environmentSettings = ["Production"];
             }
 
+            // Validate environment variable.
+            string? environmentVariable = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            bool isInvalid = true;
+
             if (string.IsNullOrWhiteSpace(environmentVariable))
             {
                 environmentVariable = "Production";
             }
 
-            // Validate environment variable.
-            bool isInvalid = true;
             foreach (var setting in environmentSettings)
             {
                 if (setting == environmentVariable)
@@ -147,14 +146,14 @@ public partial class App : Application
             }
             if (isInvalid)
             {
-                throw new Exception("The file 'launchSettings.json' contains an incorrect value for variable DOTNET_ENVIRONMENT.");
+                throw new Exception("\nNo matching value found for key DOTNET_ENVIRONMENT! \nPlease contact developer.");
             }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex);
             // TODO - How to exit properly? Logging?
-            System.Windows.Application.Current.Shutdown();
+            Debug.WriteLine(ex);
+            System.Windows.Application.Current.Shutdown(900);
         }
     }
 }
