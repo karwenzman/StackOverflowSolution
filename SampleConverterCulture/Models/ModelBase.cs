@@ -1,5 +1,7 @@
-﻿namespace SampleConverterCulture.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public abstract class ModelBase
+namespace SampleConverterCulture.Models;
+
+public abstract partial class ModelBase : ObservableValidator
 {
 }

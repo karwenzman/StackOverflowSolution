@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleTextBoxValidation.Views.Windows" 
-        xmlns:viewmodels="clr-namespace:SampleTextBoxValidation.ViewModels" 
+        xmlns:viewModels="clr-namespace:SampleTextBoxValidation.ViewModels" 
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
         Title="ShellView" Height="600" Width="1000">
 
     <Grid Background="Azure">

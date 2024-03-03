@@ -1,9 +1,18 @@
-﻿namespace SampleConverterCulture.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class ReceiptModel : ModelBase
+namespace SampleConverterCulture.Models;
+
+public partial class ReceiptModel : ModelBase
 {
-    public int Id { get; set; }
-    public string? Name { get; set; }
-    public decimal Price { get; set; }
-    public DateOnly Date { get; set; }
+	[ObservableProperty]
+	private int? _receiptId;
+
+	[ObservableProperty]
+	private string? _receiptName;
+
+	[ObservableProperty]
+	private decimal? _receiptPrice;
+
+	[ObservableProperty]
+	private DateOnly? _receiptDate;
 }

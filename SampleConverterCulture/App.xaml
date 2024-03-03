@@ -3,6 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SampleConverterCulture">
     <Application.Resources>
-         
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ShellBodyStyle.xaml" />
+                <ResourceDictionary Source="Resources/ShellFooterStyle.xaml" />
+                <ResourceDictionary Source="Resources/ShellHeaderStyle.xaml" />
+                <ResourceDictionary Source="Resources/ShellTitleStyle.xaml" />
+                <ResourceDictionary Source="Resources/TextBoxStyle.xaml" />
+                <ResourceDictionary Source="Resources/PasswordBoxStyle.xaml" />
+                <ResourceDictionary Source="Resources/ButtonStyle.xaml" />
+                <ResourceDictionary Source="Resources/DataTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="boolToVisibility" ></BooleanToVisibilityConverter>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

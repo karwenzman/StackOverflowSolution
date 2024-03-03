@@ -4,9 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleConverterCulture.Views.Windows"
+        xmlns:viewModels="clr-namespace:SampleConverterCulture.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
-    <Grid>
-        
+        Title="ShellView" Height="600" Width="1000">
+    <Grid Background="Azure">
+        <!-- *** The main structure of the window is: Titel(Row=0), Body(Row=1) and Footer(Row=2) *** -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- *** The UI's title *** -->
+        <Label Grid.Row="0" 
+               Content="{Binding ApplicationName}" 
+               Margin="10"
+               FontSize="24" FontWeight="Bold"
+               HorizontalAlignment="Center">
+        </Label>
+
+        <!-- *** The UI's body *** -->
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!-- *** The ShellViewModel is hosting the logic, which ViewModel shall be loaded *** -->
+                <StackPanel Grid.Column="1">
+                    <!-- ValidatesOnNotifyDataErrors=False => this removes the red border around the loaded user control -->
+                    <ContentControl Content="{Binding CurrentViewModel, ValidatesOnNotifyDataErrors=False}" />
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- *** The UI's footer *** -->
+        <Label Grid.Row="2" 
+               Content="Some information can be placed here." 
+               Margin="10"
+               FontSize="6" FontWeight="Bold"
+               HorizontalAlignment="Center">
+        </Label>
     </Grid>
 </Window>
