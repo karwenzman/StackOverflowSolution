@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel.__Internals;
 using CommunityToolkit.Mvvm.Input;
+using System.Globalization;
 using System.Windows;
 
 namespace SampleConverterCulture.ViewModels;
@@ -12,10 +13,10 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
 	private ReceiptModel _backupReceipt = new();
 
 	[ObservableProperty]
-	private string _screenTitle = "ksjalkjd";
+	private string _screenTitle = "SampleConverterCulture";
 
 	[ObservableProperty]
-	private string _screenFooter = "ksjalkjd";
+	private string _screenFooter;
 
 	public HomeViewModel()
 	{
@@ -28,6 +29,12 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
 		_backupReceipt.ReceiptDate = DateOnly.FromDateTime(DateTime.Today);
 		_backupReceipt.ReceiptName = "Dummy Yummy Receipt";
 		_backupReceipt.ReceiptPrice = 1.11M;
+
+		var cultureInfo = CultureInfo.CurrentCulture;
+		var cultureUiInfo = CultureInfo.CurrentUICulture;
+		
+		ScreenFooter = $"Culture: {cultureInfo} | CultureUi: {cultureUiInfo}";
+		
 
 		Receipt.PropertyChanged += Receipt_PropertyChanged;
 	}
@@ -83,6 +90,11 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
 
 		DiscardButtonCommand.NotifyCanExecuteChanged();
 		MessageBox.Show("New Values loaded.", "LoadButton");
+	}
+
+	private void Receipt_PropertyChanged1(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+	{
+		throw new NotImplementedException();
 	}
 
 	[RelayCommand(CanExecute = nameof(CanSaveDataButton))]

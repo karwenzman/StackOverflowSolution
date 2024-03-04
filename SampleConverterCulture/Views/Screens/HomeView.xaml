@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SampleConverterCulture.Views.Screens"
              xmlns:viewModels="clr-namespace:SampleConverterCulture.ViewModels"
+             xmlns:customBinding="clr-namespace:SampleConverterCulture.Models"
+             xmlns:systemGlobalization="clr-namespace:System.Globalization;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewModels:HomeViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -71,23 +73,48 @@
                 <!-- ReceiptId components -->
                 <Label Grid.Row="0" Grid.Column="1" Content="ReceiptId" />
                 <TextBox Grid.Row="1" Grid.Column="1"
+                         HorizontalContentAlignment="Right"
+                         MinWidth="200"
+                         Text="{Binding Receipt.ReceiptId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="0" Grid.Column="3" Content="ReceiptId" />
+                <TextBox Grid.Row="1" Grid.Column="3"
+                         HorizontalContentAlignment="Right"
                          MinWidth="200"
                          Text="{Binding Receipt.ReceiptId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- ReceiptDate components -->
-                <Label Grid.Row="2" Grid.Column="1" Content="ReceiptDate" />
+                <Label Grid.Row="2" Grid.Column="1" Content="ReceiptDate (en-US)" />
                 <TextBox Grid.Row="3" Grid.Column="1"
                          MinWidth="200"
-                         Text="{Binding Receipt.ReceiptDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         Text="{Binding Receipt.ReceiptDate, Mode=TwoWay, ConverterCulture=en-US, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="2" Grid.Column="3" Content="ReceiptDate (CurrentCulture)" />
+                <TextBox Grid.Row="3" Grid.Column="3"
+                         MinWidth="200"
+                         Text="{Binding Receipt.ReceiptDate, Mode=TwoWay, ConverterCulture={x:Static systemGlobalization:CultureInfo.CurrentCulture}, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                 <!-- ReceiptName components -->
                 <Label Grid.Row="4" Grid.Column="1" Content="ReceiptName" />
                 <TextBox Grid.Row="5" Grid.Column="1"
                          MinWidth="200"
                          Text="{Binding Receipt.ReceiptName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-                <!-- ReceiptPrice components -->
-                <Label Grid.Row="6" Grid.Column="1" Content="ReceiptPrice" />
-                <TextBox Grid.Row="7" Grid.Column="1"
+                <Label Grid.Row="4" Grid.Column="3" Content="ReceiptName" />
+                <TextBox Grid.Row="5" Grid.Column="3"
                          MinWidth="200"
-                         Text="{Binding Receipt.ReceiptPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                         Text="{Binding Receipt.ReceiptName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <!-- ReceiptPrice components -->
+                <Label Grid.Row="6" Grid.Column="1" Content="ReceiptPrice (en-US)" />
+                <TextBox Grid.Row="7" Grid.Column="1"
+                         HorizontalContentAlignment="Right"
+                         MinWidth="200"
+                         Text="{Binding Receipt.ReceiptPrice, Mode=TwoWay, StringFormat={}{0:C}, ConverterCulture=en-US, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="6" Grid.Column="3" Content="ReceiptPrice (CurrentCulture)" />
+                <TextBox Grid.Row="7" Grid.Column="3"
+                         HorizontalContentAlignment="Right"
+                         MinWidth="200"
+                         Text="{Binding Receipt.ReceiptPrice, Mode=TwoWay, StringFormat={}{0:C}, ConverterCulture={x:Static systemGlobalization:CultureInfo.CurrentCulture}, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                <Label Grid.Row="6" Grid.Column="5" Content="ReceiptPrice (no ConverterCulture: default en-US)" />
+                <TextBox Grid.Row="7" Grid.Column="5"
+                         HorizontalContentAlignment="Right"
+                         MinWidth="200"
+                         Text="{Binding Receipt.ReceiptPrice, Mode=TwoWay, StringFormat={}{0:C}, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
             </Grid>
         </DockPanel>

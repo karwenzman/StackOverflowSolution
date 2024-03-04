@@ -13,7 +13,8 @@ public partial class App : Application
 
     public App()
     {
-        SetApplicationCulture();
+        SetApplicationCulture(new CultureInfo("en-GB"));
+        //SetApplicationCulture();
         SetEnvironmentVariable(["Development", "Production"]);
 
         AppHost = Host.CreateDefaultBuilder()
@@ -98,27 +99,28 @@ public partial class App : Application
         Thread.CurrentThread.CurrentCulture = cultureInfo;
         Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-        // This work around is needed to activate the culture in WPF controls like TextBox.
-        FrameworkElement.LanguageProperty.OverrideMetadata(
-            forType: typeof(FrameworkElement),
-            typeMetadata: new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(cultureInfo.Name)));
+		// This work around is needed to activate the culture in WPF controls like TextBox.
+		// ConverterCulture={x:Static systemGlobalization:CultureInfo.CurrentCulture} is replacing the following code
+		//FrameworkElement.LanguageProperty.OverrideMetadata(
+		//    forType: typeof(FrameworkElement),
+		//    typeMetadata: new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(cultureInfo.Name)));
 
-        // TODO - Create a custom binding class (e.g., CultureAwareBinding) that automatically sets the ConverterCulture to the current culture when created.
-    }
+		// TODO - Create a custom binding class (e.g., CultureAwareBinding) that automatically sets the ConverterCulture to the current culture when created.
+	}
 
-    /// <summary>
-    /// This method is validating the environment settings and the existance of the appsettings file.
-    /// <para></para>
-    /// The key <b>DOTNET_ENVIRONMENT</b> is read from file 'launchSettings.json'.
-    /// <br></br>
-    /// If the key's value does not correspond with the array of environment settings provided as parameter,
-    /// an exception is thrown and the application shuts down.
-    /// <br></br>
-    /// If no key is found or no array of environment settings is provided, 
-    /// the fallback value is 'Production'.
-    /// </summary>
-    /// <param name="environmentSettings">An array of string representing the values <b>DOTNET_ENVIRONMENT</b> could be set to.</param>
-    private static void SetEnvironmentVariable(string[]? environmentSettings = null)
+	/// <summary>
+	/// This method is validating the environment settings and the existance of the appsettings file.
+	/// <para></para>
+	/// The key <b>DOTNET_ENVIRONMENT</b> is read from file 'launchSettings.json'.
+	/// <br></br>
+	/// If the key's value does not correspond with the array of environment settings provided as parameter,
+	/// an exception is thrown and the application shuts down.
+	/// <br></br>
+	/// If no key is found or no array of environment settings is provided, 
+	/// the fallback value is 'Production'.
+	/// </summary>
+	/// <param name="environmentSettings">An array of string representing the values <b>DOTNET_ENVIRONMENT</b> could be set to.</param>
+	private static void SetEnvironmentVariable(string[]? environmentSettings = null)
     {
         try
         {
