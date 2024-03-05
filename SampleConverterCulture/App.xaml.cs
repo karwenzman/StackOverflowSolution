@@ -13,8 +13,8 @@ public partial class App : Application
 
     public App()
     {
-        SetApplicationCulture(new CultureInfo("en-GB"));
-        //SetApplicationCulture();
+        //SetApplicationCulture(new CultureInfo("en-GB"));
+        SetApplicationCulture();
         SetEnvironmentVariable(["Development", "Production"]);
 
         AppHost = Host.CreateDefaultBuilder()
@@ -26,6 +26,7 @@ public partial class App : Application
 
                 // Adds the Screen's ViewModels.
                 services.AddTransient<IHomeViewModel, HomeViewModel>();
+                services.AddTransient<IInfoViewModel, InfoViewModel>();
             })
             .Build();
     }

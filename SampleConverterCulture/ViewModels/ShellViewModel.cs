@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
-using System.Globalization;
 
 namespace SampleConverterCulture.ViewModels;
 
@@ -15,5 +15,17 @@ public partial class ShellViewModel : ViewModelBase, IShellViewModel
 	public ShellViewModel()
 	{
 		CurrentViewModel = App.AppHost!.Services.GetRequiredService<IHomeViewModel>();
+	}
+
+	[RelayCommand]
+	public void HomeScreenButton()
+	{
+		CurrentViewModel = App.AppHost!.Services.GetRequiredService<IHomeViewModel>();
+	}
+
+	[RelayCommand]
+	public void InfoScreenButton()
+	{
+		CurrentViewModel = App.AppHost!.Services.GetRequiredService<IInfoViewModel>();
 	}
 }

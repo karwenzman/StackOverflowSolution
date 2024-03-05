@@ -42,11 +42,19 @@
         </ScrollViewer>
 
         <!-- *** The UI's footer *** -->
-        <Label Grid.Row="2" 
-               Content="Some information can be placed here." 
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Home Screen"
+                        Command="{Binding HomeScreenButtonCommand}" />
+                <Button Content="Info Screen"
+                        Command="{Binding InfoScreenButtonCommand}" />
+            </StackPanel>
+            <Label
+               Content="Project StackOverflowSolution" 
                Margin="10"
-               FontSize="6" FontWeight="Bold"
+               FontSize="8" FontWeight="Bold"
                HorizontalAlignment="Center">
-        </Label>
+            </Label>
+        </StackPanel>
     </Grid>
 </Window>

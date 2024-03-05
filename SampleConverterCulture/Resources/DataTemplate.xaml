@@ -6,5 +6,8 @@
     <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
         <screens:HomeView />
     </DataTemplate>
-    
+    <DataTemplate DataType="{x:Type viewModels:InfoViewModel}">
+        <screens:InfoView />
+    </DataTemplate>
+
 </ResourceDictionary>

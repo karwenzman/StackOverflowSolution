@@ -13,7 +13,7 @@ public partial class HomeViewModel : ViewModelBase, IHomeViewModel
 	private ReceiptModel _backupReceipt = new();
 
 	[ObservableProperty]
-	private string _screenTitle = "SampleConverterCulture";
+	private string _screenTitle = "Home Screen";
 
 	[ObservableProperty]
 	private string _screenFooter;

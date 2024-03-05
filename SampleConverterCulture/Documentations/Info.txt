@@ -1,0 +1,31 @@
+Application: SampleConverterCulture
+Platform: x64
+Framework: net8.0-windows
+
+I. Project Goal
+===============
+Learn skills to enable 'Globalization' features.
+
+The standard culture for WPF apps is 'en-US'. 
+Therefore actions need to be taken, to set respect the regional culture formats.
+You will find obvious differences in date and currency formats.
+a) currency => StringFormat={}{0:C}
+   'en-US' it is '$'
+   'en-GB' it is 'the pound sign'
+   'de-DE' it is '€'
+b) date
+   'en-US' it is '12/30/2024'
+   'en-GB' it is '30/12/2024'
+   'de-DE' it is '30.12.2024'
+   
+
+II. Project Configuration
+=========================
+
+X. Deployment
+=============
+If the application is deployed, it is necessary to make some files available for this process.
+- appsettings.json
+  Set the 'Build' property to 'Content'.
+- Info.txt
+  Set the 'Build' property to 'Content'.
