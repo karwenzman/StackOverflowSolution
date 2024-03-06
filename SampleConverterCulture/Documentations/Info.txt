@@ -7,7 +7,7 @@ I. Project Goal
 Learn skills to enable 'Globalization' features.
 
 The standard culture for WPF apps is 'en-US'. 
-Therefore actions need to be taken, to set respect the regional culture formats.
+Therefore actions need to be taken, to respect the regional culture formats.
 You will find obvious differences in date and currency formats.
 a) currency => StringFormat={}{0:C}
    'en-US' it is '$'
@@ -21,6 +21,9 @@ b) date
 
 II. Project Configuration
 =========================
+The static class 'CultureInfoHelper.cs' is implementing logic to set the culture globally.
+The class 'CustomBinding.cs' is doing the same on a different way (work in progress).
+
 
 X. Deployment
 =============

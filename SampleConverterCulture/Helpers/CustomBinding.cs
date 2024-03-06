@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace SampleConverterCulture.Models;
+namespace SampleConverterCulture.Helpers;
 
 /// <summary>
 /// Source: https://www.codeproject.com/tips/1004834/binding-with-respect-to-currentculture
@@ -8,9 +8,9 @@ namespace SampleConverterCulture.Models;
 /// </summary>
 public class CustomBinding : System.Windows.Data.Binding
 {
-	public CustomBinding()
-	{
-		ConverterCulture = CultureInfo.CurrentCulture;
-		//ConverterCulture = Thread.CurrentThread.CurrentCulture;
-	}
+    public CustomBinding()
+    {
+        ConverterCulture = CultureInfo.CurrentCulture;
+        //ConverterCulture = Thread.CurrentThread.CurrentCulture;
+    }
 }
