@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="CloseDocumentIcon" UriSource="pack://application:,,,/StackOverflow.Library;component/Icons/CloseDocument_16x.png" />
+    <!--<BitmapImage x:Key="CloseDocumentIcon" UriSource="pack://application:,,,/karwenzman.Library;component/Icons/CloseDocument_16x.png" />-->
+    <!--<BitmapImage x:Key="CloseDocumentIcon" UriSource="pack://application:,,,/IconLibrary;component/Icons/CloseDocument_16x.png" />-->
+</ResourceDictionary>
